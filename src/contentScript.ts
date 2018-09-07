@@ -1,28 +1,24 @@
-chrome.runtime.onMessage.addListener((request, sender, response) => {
+chrome.runtime.onMessage.addListener((request, sender, respond) => {
     switch (true) {
         case request.listen:
-            const s = document.createElement('script');
-            s.src = chrome.extension.getURL('js/clientScript.js');
-            console.log(s.src)
-            s.onload = function () {
-                this.remove();
-            };
-            (document.head || document.documentElement).appendChild(s);
+            document.addEventListener('flowshot-client-message', (event: CustomEvent) => {
+                console.log('got event', event);
+                chrome.runtime.sendMessage(event.detail);
+            });
             break;
         case request.inject:
-            injectH4(response);
+            injectH4(respond);
+            break;
+        default:
+            console.log('Request - ', request);
             break;
     }
 });
-
-function injectListener() {
-
-}
 
 function injectH4(respond) {
     const newDiv = document.createElement('h4');
     newDiv.textContent = 'Flowshot';
     document.body.insertAdjacentElement('beforebegin', newDiv);
     console.log('injecting h4');
-    respond('injected h4')
+    respond('bg injected h4')
 }

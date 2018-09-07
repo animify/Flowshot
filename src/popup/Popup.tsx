@@ -39,6 +39,7 @@ export default class Popup extends React.Component<AppProps, AppState> {
                     fauxImage.src = dataURI;
                     fauxImage.onload = () => {
                         console.log(fauxImage)
+
                         this.setState((prevState) => ({
                             screenshots: [...prevState.screenshots, {
                                 title: 'any',
@@ -63,11 +64,10 @@ export default class Popup extends React.Component<AppProps, AppState> {
             active: true,
             currentWindow: true,
         }, (tabs) => {
-            console.log(tabs);
             chrome.tabs.sendMessage(
                 tabs[0].id,
                 { listen: true }, (res) => {
-                    console.log(res);
+                    chrome.tabs.executeScript(tabs[0].id, { file: 'js/clientScript.js' });
                 }
             );
         });
@@ -84,7 +84,7 @@ export default class Popup extends React.Component<AppProps, AppState> {
             chrome.tabs.sendMessage(
                 tabs[0].id,
                 { inject: true }, (res) => {
-                    console.log(res);
+                    console.log('response', res);
                 }
             );
         });

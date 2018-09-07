@@ -11,7 +11,20 @@ class FlowshotClient {
 
     onClick(e: MouseEvent) {
         console.log('onclick', e);
+        document.dispatchEvent(new CustomEvent('flowshot-client-message', {
+            detail: {
+                click: true,
+                payload: {
+                    type: e.type,
+                    pageX: e.pageX,
+                    pageY: e.pageY,
+                    screenX: e.screenX,
+                    screenY: e.screenY
+                }
+            }
+        }));
     }
 }
+
 
 new FlowshotClient();

@@ -1,12 +1,12 @@
 {
-  "name": "chrome-extension-react-typescript-boilerplate",
+  "name": "flowshot",
   "version": "1.0.0",
-  "description": "A boilerplate project to quickly build a Chrome extension using TypeScript and React (built using webpack).",
+  "description": "Flowshot.",
   "scripts": {
     "build": "./node_modules/.bin/webpack",
     "watch": "./node_modules/.bin/webpack -w"
   },
-  "author": "Joe Martella",
+  "author": "Stefan Mansson (https://mansson.io)",
   "license": "MIT",
   "devDependencies": {
     "@types/chrome": "0.0.60",

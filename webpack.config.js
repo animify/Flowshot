@@ -5,6 +5,7 @@ module.exports = {
     entry: {
         popup: path.join(__dirname, "src/popup/index.tsx"),
         eventPage: path.join(__dirname, "src/eventPage.ts"),
+        clientScript: path.join(__dirname, "src/clientScript.ts"),
         contentScript: path.join(__dirname, "src/contentScript.ts")
     },
     devtool: "inline-source-map",

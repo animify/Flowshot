@@ -1,4 +1,4 @@
-console.log = console.log.bind(null, '%c Flowshot:', 'font-weight: bold; color: #000')
+console.log = console.log.bind(null, '%c Flowshot:', 'font-weight: bold; color: #000');
 
 // Listen to messages sent from other parts of the extension.
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {

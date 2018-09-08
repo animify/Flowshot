@@ -1,19 +1,20 @@
 .button {
-    @extend .ph3, .pv2;
+    @extend .ph3, .pv3;
     position: relative;
     display: inline-block;
     outline: 0;
     border: 0;
-    border: 1px solid $color.dim;
-    border-radius: $borderRadius.base;
+    border-radius: $borderRadius.xlarge;
     background-color: $color.white;
     color: $textColor.heading;
     font-weight: $fontWeight.bold;
     font-size: $fontSize.body;
-    line-height: $lineHeight.body;
-    transition: box-shadow $animation-duration-m $animation-type-ease;
-    box-shadow: $boxShadow.form;
+    line-height: 1;
+    transition: box-shadow $durationS ease, transform $durationS ease;
+    box-shadow: 0px 6px 12px 0px rgba(71, 71, 71, 0.1);
+    transform: translateY(0);
     text-align: center;
+    flex-shrink: 0;
 
     &.transparent {
         background-color: transparent;
@@ -24,11 +25,14 @@
     &:hover {
         background-color: $color.snow;
         color: $textColor.heading;
+        box-shadow: 0px 6px 12px 0px rgba(71, 71, 71, 0.14);
+        transform: translateY(-2px);
     }
 
     &:active {
         background-color: $color.dim;
         color: $textColor.heading;
+        transform: translateY(0);
     }
 
     for size in $sizeList {
@@ -40,20 +44,23 @@
     for color in $listColors {
         &.{color} {
             background-color: $color[color];
-            border-color: @background-color;
             color: $color.white;
 
             &:hover {
-                background-color: darken(@background-color, 8%);
-                border-color: @background-color;
                 color: #fff;
             }
 
             &:active {
-                background-color: darken(@background-color, 16%);
-                border-color: @background-color;
                 color: #fff;
             }
+        }
+    }
+
+    &.green {
+        color: $textColor.heading;
+
+        &:hover {
+            color: $textColor.heading;
         }
     }
 

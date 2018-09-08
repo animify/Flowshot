@@ -1,74 +1,112 @@
-$baseSpacing = .4rem; // 4px
+$baseSpacing = 0.4rem; // 4px
 
-for $size in '0' '1' '2' '3' '4' '5' '6' '7' '8' '9' '10'
+for $size in '0' '1' '2' '3' '4' '5' '6' '7' '8' '9' '10' {
     $spacing = $s[$size];
     $negativeSpacing = - $s[$size];
 
-    .p{$size}
+    .p{$size} {
         padding: $spacing;
+    }
 
-    .pt{$size}
+    .pt{$size} {
         padding-top: $spacing;
+    }
 
-    .pr{$size}
+    .pr{$size} {
         padding-right: $spacing;
+    }
 
-    .pl{$size}
+    .pl{$size} {
         padding-left: $spacing;
+    }
 
-    .pb{$size}
+    .pb{$size} {
         padding-bottom: $spacing;
+    }
 
-    .ph{$size}
+    .ph{$size} {
         padding-left: $spacing;
         padding-right: $spacing;
+    }
 
-    .pv{$size}
+    .pv{$size} {
         padding-top: $spacing;
         padding-bottom: $spacing;
+    }
 
-    .m{$size}
+    .m{$size} {
         margin: $spacing;
+    }
 
-    .mt{$size}
+    .mt{$size} {
         margin-top: $spacing;
+    }
 
-    .mr{$size}
+    .mr{$size} {
         margin-right: $spacing;
+    }
 
-    .ml{$size}
+    .ml{$size} {
         margin-left: $spacing;
+    }
 
-    .mb{$size}
+    .mb{$size} {
         margin-bottom: $spacing;
+    }
 
-    .mh{$size}
+    .mh{$size} {
         margin-left: $spacing;
         margin-right: $spacing;
+    }
 
-    .mv{$size}
+    .mv{$size} {
         margin-top: $spacing;
         margin-bottom: $spacing;
+    }
 
-    .n-m{$size}
+    .n-m{$size} {
         margin: $negativeSpacing;
+    }
 
-    .n-mt{$size}
+    .n-mt{$size} {
         margin-top: $negativeSpacing;
+    }
 
-    .n-mr{$size}
+    .n-mr{$size} {
         margin-right: $negativeSpacing;
+    }
 
-    .n-ml{$size}
+    .n-ml{$size} {
         margin-left: $negativeSpacing;
+    }
 
-    .n-mb{$size}
+    .n-mb{$size} {
         margin-bottom: $negativeSpacing;
+    }
 
-    .n-mh{$size}
+    .n-mh{$size} {
         margin-left: $negativeSpacing;
         margin-right: $negativeSpacing;
+    }
 
-    .n-mv{$size}
+    .n-mv{$size} {
         margin-top: $negativeSpacing;
         margin-bottom: $negativeSpacing;
+    }
+}
+
+.mtauto {
+    margin-top: auto;
+}
+
+.mrauto {
+    margin-right: auto;
+}
+
+.mlauto {
+    margin-left: auto;
+}
+
+.mbauto {
+    margin-bottom: auto;
+}

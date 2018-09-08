@@ -1,290 +1,405 @@
-.clearfix
+.clearfix {
     cf();
+}
 
-.stackable > *
+.stackable > * {
     stack();
+}
 
-.stack
+.stack {
     stack();
+}
 
-.unstack
+.unstack {
     unstack();
+}
 
-.block, .shown
+.block, .shown {
     display: block !important;
+}
 
-.inline
+.inline {
     display: inline-block !important;
+}
 
-.relative
+.relative {
     position: relative;
+}
 
-.fixed
+.fixed {
     position: fixed;
+}
 
-.absolute
+.absolute {
     position: absolute;
+}
 
-.static
+.static {
     position: static;
+}
 
-.fixed, .absolute
-    &.top
+.fixed, .absolute {
+    &.top {
         top: 0;
+    }
 
-    &.left
+    &.left {
         left: 0;
+    }
 
-    &.right
+    &.right {
         right: 0;
+    }
 
-    &.bottom
+    &.bottom {
         bottom: 0;
+    }
+}
 
-.hidden
+.hidden {
     display: none !important;
+}
 
-.visible
+.visible {
     visibility: visible !important;
+}
 
-.invisible
+.invisible {
     visibility: hidden !important;
+}
 
-.borderless
+.borderless {
     border: 0 !important;
+}
 
-.centered
-    &:not(.vertical):not(.horizontal)
+.centered {
+    &:not(.vertical):not(.horizontal) {
         align(both);
+    }
 
-    &.vertical
+    &.vertical {
         align(vertical);
+    }
 
-    &.horizontal
+    &.horizontal {
         align(horizontal);
+    }
+}
 
-.nowrap
+.nowrap {
     white-space: nowrap;
+}
 
-.capitalize
+.capitalize {
     text-transform: capitalize;
+}
 
-.text
-    &-truncate
+.text {
+    &-truncate {
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
+    }
 
-    &-right
+    &-right {
         text-align: right;
+    }
 
-    &-left
+    &-left {
         text-align: left;
+    }
 
-    &-center
+    &-center {
         text-align: center;
+    }
 
-    &-justify
+    &-justify {
         text-align: justify;
 
-        &:after
+        &:after {
             display: inline-block;
             content: '';
             width: 100%;
+        }
+    }
+}
 
-.font-weight
-    &-book
+.font-weight {
+    &-book {
         font-weight: $fontWeight.book;
+    }
 
-    &-semibold
+    &-semibold {
         font-weight: $fontWeight.semiBold;
+    }
 
-    &-bold
+    &-bold {
         font-weight: $fontWeight.bold;
+    }
 
-    &-black
+    &-black {
         font-weight: $fontWeight.black;
+    }
+}
 
-.float
-    &-left
+.float {
+    &-left {
         float: left;
+    }
 
-    &-right
+    &-right {
         float: right;
+    }
 
-    &-none
+    &-none {
         float: none;
+    }
+}
 
-.valign
-    &-top
+.valign {
+    &-top {
         vertical-align: top;
+    }
 
-    &-middle
+    &-middle {
         vertical-align: middle;
+    }
 
-    &-bottom
+    &-bottom {
         vertical-align: bottom;
+    }
 
-    &-baseline
+    &-baseline {
         vertical-align: baseline;
+    }
 
-    &-text-top
+    &-text-top {
         vertical-align: text-top;
+    }
 
-    &-text-bottom
+    &-text-bottom {
         vertical-align: text-bottom;
+    }
+}
 
-.center
+.center {
     align(both);
 
-    &-horizontal
+    &-horizontal {
         align(horizontal);
+    }
 
-    &-vertical
+    &-vertical {
         align(vertical);
+    }
+}
 
-.transform
-    &.uppercase
+.transform {
+    &.uppercase {
         text-transform: uppercase;
+    }
 
-    &.lowercase
+    &.lowercase {
         text-transform: lowercase;
+    }
 
-    &.capitalize
+    &.capitalize {
         text-transform: capitalize;
+    }
+}
 
-.circle
+.circle {
     border-radius: 50%;
+}
 
-.shadowless
+.shadowless {
     box-shadow: none !important;
+}
 
-.flex
+.flex {
     display: flex !important;
 
-    &-auto
+    &-auto {
         flex: 1 1 auto;
         min-width: 0;
         min-height: 0;
+    }
 
-    &-none
+    &-none {
         flex: none;
+    }
 
-    &-column
+    &-column {
         flex-direction: column;
+    }
 
-    &-row
+    &-row {
         flex-direction: row;
+    }
 
-    &-wrap
+    &-shrink {
+        flex-shrink: 1;
+    }
+
+    &-noshrink {
+        flex-shrink: 0;
+    }
+
+    &-grow {
+        flex-grow: 1;
+    }
+
+    &-wrap {
         flex-wrap: wrap;
+    }
 
-    &-nowrap
+    &-nowrap {
         flex-wrap: nowrap;
+    }
 
-    &-wrap-reverse
+    &-wrap-reverse {
         flex-wrap: wrap-reverse;
+    }
 
-    &-column-reverse
+    &-column-reverse {
         flex-direction: column-reverse;
+    }
 
-    &-row-reverse
+    &-row-reverse {
         flex-direction: row-reverse;
+    }
+}
 
-.align
-    &-start
+.align {
+    &-start {
         align-items: flex-start;
+    }
 
-    &-end
+    &-end {
         align-items: flex-end;
+    }
 
-    &-center
+    &-center {
         align-items: center;
+    }
 
-    &-baseline
+    &-baseline {
         align-items: baseline;
+    }
 
-    &-stretch
+    &-stretch {
         align-items: stretch;
+    }
+}
 
-.self
-    &-start
+.self {
+    &-start {
         align-self: flex-start;
+    }
 
-    &-end
+    &-end {
         align-self: flex-end;
+    }
 
-    &-center
+    &-center {
         align-self: center;
+    }
 
-    &-baseline
+    &-baseline {
         align-self: baseline;
+    }
 
-    &-stretch
+    &-stretch {
         align-self: stretch;
+    }
+}
 
-.justify
-    &-start
+.justify {
+    &-start {
         justify-content: flex-start;
+    }
 
-    &-end
+    &-end {
         justify-content: flex-end;
+    }
 
-    &-center
+    &-center {
         justify-content: center;
+    }
 
-    &-between
+    &-between {
         justify-content: space-between;
+    }
 
-    &-around
+    &-around {
         justify-content: space-around;
+    }
+}
 
-.content
-    &-start
+.content {
+    &-start {
         align-content: flex-start;
+    }
 
-    &-end
+    &-end {
         align-content: flex-end;
+    }
 
-    &-center
+    &-center {
         align-content: center;
+    }
 
-    &-between
+    &-between {
         align-content: space-between;
+    }
 
-    &-around
+    &-around {
         align-content: space-around;
+    }
 
-    &-stretch
+    &-stretch {
         align-content: stretch;
+    }
+}
 
-.order
-    &-0
+.order {
+    &-0 {
         order: 0;
+    }
 
-    &-1
+    &-1 {
         order: 1;
+    }
 
-    &-2
+    &-2 {
         order: 2;
+    }
 
-    &-3
+    &-3 {
         order: 3;
+    }
 
-    &-4
+    &-4 {
         order: 4;
+    }
 
-    &-5
+    &-5 {
         order: 5;
+    }
 
-    &-6
+    &-6 {
         order: 6;
+    }
 
-    &-7
+    &-7 {
         order: 7;
+    }
 
-    &-8
+    &-8 {
         order: 8;
+    }
 
-    &-last
+    &-last {
         order: 99999;
+    }
+}

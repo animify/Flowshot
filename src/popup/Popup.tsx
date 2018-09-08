@@ -81,23 +81,39 @@ export default class Popup extends React.Component<AppProps, AppState> {
         const { screenshots, recording } = this.state;
         const isRecording = recording === RecordingStatus.started;
         return (
-            <div className="p6">
-                <div className="text-center">
-                    <h4 className="mb1">{isRecording ? 'Recording...' : 'Begin your session'}</h4>
-                    <p className="mb4">Start recording and keep browsing the web like you'd normally do. Once you think you're done, stop the recording and download your Overflow file.</p>
+            <React.Fragment>
+                <header className="ph6 pt6">
+                    <img height="20" src="js/Flowshot.svg" />
+                </header>
+                <div className="ph6 pt2 text-left">
                     {isRecording ?
                         <React.Fragment>
-                            <a className="button" onClick={() => this.setRecordingState(RecordingStatus.discarded)}>Discard Recording</a>
-                            <a className="ml4 button red" onClick={() => this.setRecordingState(RecordingStatus.stopped)}>Stop Recording</a>
+                            <h2>Recording...</h2>
+                            <p className="mb6">Your session is now being recorded and your clicks are being tracked.</p>
                         </React.Fragment>
                         :
                         <React.Fragment>
-                            <a className="button green" onClick={() => this.setRecordingState(RecordingStatus.started)}>Start Recording</a>
+                            <h2>Let's get started</h2>
+                            <p className="mb6">Start off your session and start keep browsing the web. When done, end your session and download your Overflow file.</p>
                         </React.Fragment>
                     }
                 </div>
+
+                <div className="pb5 ph6 flex flex-noshrink mtauto">
+                    {isRecording ?
+                        <React.Fragment>
+                            <a className="button black flex-grow" onClick={() => this.setRecordingState(RecordingStatus.discarded)}>Discard</a>
+                            <a className="ml4 button red flex-grow" onClick={() => this.setRecordingState(RecordingStatus.stopped)}>Stop &amp; Save...</a>
+                        </React.Fragment>
+                        :
+                        <React.Fragment>
+                            <a className="button green flex-grow" onClick={() => this.setRecordingState(RecordingStatus.started)}>Start Session</a>
+                        </React.Fragment>
+                    }
+                </div>
+
                 {screenshots.map((s) => <img key={s.date} height={140} src={s.dataURI} />)}
-            </div>
+            </React.Fragment>
         );
     };
 }

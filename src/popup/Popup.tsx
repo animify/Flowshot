@@ -76,8 +76,8 @@ export default class Popup extends React.Component<AppProps, AppState> {
     }
 
     discardRecording = () => {
-        Utils.getCurrentTab().then((tabId) => {
-            chrome.tabs.sendMessage(tabId, { discardRecording: true });
+        Utils.getCurrentTab().then((tab) => {
+            chrome.tabs.sendMessage(tab.id, { discardRecording: true });
 
             this.setState({
                 recording: false
@@ -105,8 +105,8 @@ export default class Popup extends React.Component<AppProps, AppState> {
                         </React.Fragment>
                     }
                 </div>
-                {screenshots.map(s => <img key={s.date} height={140} src={s.dataURI} />)}
+                {screenshots.map((s) => <img key={s.date} height={140} src={s.dataURI} />)}
             </div>
-        )
-    }
+        );
+    };
 }

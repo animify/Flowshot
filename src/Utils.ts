@@ -7,7 +7,7 @@ export class Utils {
             }, (tabs) => {
                 return resolve(tabs[0]);
             });
-        })
+        });
     }
 
     static sendMessage(tabId: number, message: any, callback: (response: any) => void) {

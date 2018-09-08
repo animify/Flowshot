@@ -11,7 +11,7 @@ export interface RecordingEvent {
         pageY: number;
         clientX: number;
         clientY: number;
-    }
+    };
 }
 
 export enum RecordingStatus {

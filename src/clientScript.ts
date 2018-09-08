@@ -2,9 +2,8 @@ import EventBus from './EventBus';
 
 class FlowshotClient {
     constructor() {
-        console.debug = console.debug.bind(null, '%c Flowshot Client:', 'font-weight: bold; color: #ffcc00');
-
         if (!window.FlowshotEvent) {
+            console.debug = console.debug.bind(null, '%c Flowshot Client:', 'font-weight: bold; color: #ffcc00');
             window.FlowshotEvent = new EventBus();
             console.debug('Setting EventBus');
         }
@@ -36,7 +35,6 @@ class FlowshotClient {
         this.detachClickListener();
         window.FlowshotEvent.add('click.flowshot', this.onClick);
     }
-
 
     onClick(e: MouseEvent) {
         console.debug('Click event - ', e);

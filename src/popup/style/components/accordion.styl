@@ -1,0 +1,58 @@
+.accordion
+    width: 100%;
+
+    & > .title
+        @extend .pv2;
+        cursor: default;
+        color: $textColor.heading;
+        font-weight: $fontWeight.semiBold;
+        transition: padding-bottom 140ms ease;
+
+        & > i
+            width: 1.2rem;
+            display: inline-block;
+            height: 1px;
+
+            &::before
+                content: '\f125';
+
+        &.open
+            i::before
+                content: '\f123';
+
+    & > .content
+        display: none;
+        color: $textColor.body;
+
+        &.open
+            display: block;
+
+        & + .title
+            @extend .mt1;
+
+    &.styled
+        padding: 0;
+        max-width: 40rem;
+        border: 1px solid $color.dim;
+        background-color: $color.white;
+        border-radius: $borderRadius.base;
+
+        &.fluid
+            max-width: none;
+
+        & > .title
+            @extend .p4;
+            border-top: 1px solid $color.dim;
+            color: $textColor.heading;
+
+            &.open
+                @extend .pb1;
+
+            &:first-child
+                border: none;
+
+        & > .content
+            @extend .ph4, .pb4;
+
+            & + .title
+                @extend .mt0;

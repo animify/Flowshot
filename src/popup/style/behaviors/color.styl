@@ -1,0 +1,14 @@
+for $prop, $val in $color
+    .{$prop}\\\@text
+        color: $val !important;
+
+for $prop, $val in $color
+    .{$prop}\\\@border
+        border-color: $val !important;
+
+        &::before, &::after
+            border-color: $val !important;
+
+for $prop, $val in $color
+    .{$prop}\\\@bg
+        background-color: $val !important;

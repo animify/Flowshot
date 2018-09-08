@@ -1,0 +1,134 @@
+.input
+    position: relative;
+    font-style: normal;
+    display: flex;
+    flex-direction: column;
+
+    label:not(.checkbox)
+        font-size: $fontSize.sub;
+        color: $textColor.heading;
+        font-weight: $fontWeight.semiBold;
+
+    textarea
+        min-height: 8rem;
+        max-height: 16rem;
+        resize: vertical;
+
+    input[type='text'], input[type='number'], input[type='password'], input[type='email'], textarea
+        @extend .ph3, .pv2;
+        min-width: 21.6rem;
+        outline: 0;
+        border: 0;
+        border: 1px solid $color.dim;
+        border-radius: $borderRadius.base;
+        background-color: $color.white;
+        box-shadow: $boxShadow.form;
+        color: $textColor.heading;
+        text-align: left;
+        font-size: $fontSize.body;
+        font-family: $fontFamily.body;
+        line-height: $lineHeight.body;
+        transition: border-color $animation-type-ease $animation-duration-m;
+        order: 2;
+
+        & + label
+            @extend .mb1;
+            margin-bottom: .4rem;
+            order: 1;
+            font-weight: $fontWeight.bold;
+
+        &:hover
+            border-color: $color.smoke;
+            box-shadow: $boxShadow.formFocus;
+
+            & + label
+                color: $textColor.heading;
+
+        &:focus
+            border-color: $color.base;
+            box-shadow: $boxShadow.formFocus;
+
+            & + label
+                color: $color.base;
+
+        +inputPlaceholder()
+            color: $textColor.light;
+            opacity: 1;
+
+    input[type='password']
+        font-family: small-caption;
+
+        +inputPlaceholder()
+            font-family: $fontFamily.body;
+
+    .checkbox
+        @extend .pl8, .m0;
+        position: relative;
+        width: fit-content;
+        width: -moz-max-content;
+        user-select: none;
+
+        & > .checkmark
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 2.2rem;
+            width: 2.2rem;
+            background-color: $color.white;
+            box-shadow: inset 0 0 0 1px $color.dim;
+            border-radius: $borderRadius.small;
+            transition: box-shadow cubic-bezier(.02, .49, .01, .97) .14s;
+
+            &::after
+                background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg width='16' height='13' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M0,5.29621511 L3.03029644,8.74041022 C3.192436,8.92469644 3.47326933,8.94264933 3.65755511,8.78050978 C3.66751911,8.77174311 3.67708489,8.76253511 3.68622489,8.75291244 L12,0' transform='translate(2 2)' stroke='%23FFF' stroke-width='2.5' fill='none' stroke-linecap='round'/%3e%3c/svg%3e");
+                width: 1.2rem;
+                height: .94rem;
+                content: ' ';
+                background-size: auto auto;
+                background-size: cover;
+                absolute: top .56rem left .5rem;
+                transform: scale(0);
+                transition: transform cubic-bezier(.02, .49, .01, .97) .14s .1s;
+
+        & > input[type='checkbox']
+            position: absolute;
+            opacity: 0;
+
+            &:checked
+                & ~ .checkmark
+                    border-color: $color.base;
+                    box-shadow: inset 0 0 0 2rem @border-color;
+
+                    &::after
+                        transform: scale(1);
+
+        &:hover
+            .checkmark
+                box-shadow: inset 0 0 0 2rem $color.dim;
+
+    &.transparent
+        input[type='text'], input[type='number'], input[type='password'], input[type='email'], textarea
+            @extend .m0, .p0;
+            border: 0;
+            box-shadow: none;
+            background-color: transparent;
+
+        textarea
+            resize: none;
+
+    +disabled()
+        input[type='text'], input[type='number'], input[type='password'], input[type='email'], textarea
+            color: $textColor.disabled;
+
+            +inputPlaceholder()
+                color: $textColor.disabled;
+                opacity: 1;
+
+    & + .input
+        @extend .mt6;
+
+    &.full
+        input[type='text'], input[type='number'], input[type='password'], input[type='email'], textarea
+            max-width: none;
+            display: block;
+            width: 100%;

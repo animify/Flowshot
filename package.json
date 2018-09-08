@@ -19,7 +19,12 @@
     "ts-loader": "^4.0.1",
     "typescript": "^2.7.2",
     "webpack": "^4.1.1",
-    "webpack-cli": "^2.0.12"
+    "webpack-cli": "^2.0.12",
+    "jeet": "^7.2.0",
+    "nib": "^1.1.2",
+    "rupture": "^0.6.2",
+    "file-loader": "^1.1.6",
+    "stylus-loader": "^3.0.1"
   },
   "dependencies": {
     "react": "^16.2.0",

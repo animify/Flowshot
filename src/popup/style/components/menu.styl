@@ -1,0 +1,126 @@
+.menu
+    .item
+        line-height: $lineHeight.body;
+        display: inline-block;
+        font-weight: $fontWeight.semiBold;
+        @extend .link;
+        @extend .link.link-body;
+
+        &.active
+            color: $color.base;
+
+        & + .item
+            @extend .ml4;
+
+        &.header
+            color: $textColor.heading;
+            font-weight: $fontWeight.bold;
+
+    & > .dropdown, & > .item, & .float-right > .dropdown, & .float-right > .item, & .float-left > .dropdown, & .float-left > .item
+        & + .dropdown, & + .item
+            @extend .m0, .ml9;
+
+    .container
+        & > .item + .item
+            @extend .m0, .ml6;
+
+    &.basic
+        @extend .ph6;
+        background-color: $color.snow;
+
+        .item
+            @extend .pv3;
+
+    &.nav
+        @extend .ph6;
+        padding: 0 2.4rem;
+        background-color: #fff;
+        fixed: top left;
+        width: 100%;
+        z-index: 1000;
+        box-shadow: 0 1px 14px 0 rgba(0, 0, 31, .1);
+
+        &.submenu
+            absolute: top 60px left;
+
+        &.header
+            @extend .pt2, .pb10;
+            background: linear-gradient(to bottom, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0));
+
+            &.hasborder
+                box-shadow: none;
+
+        .item
+            @extend .pv3, .ph0;
+
+        .logo
+            @extend .p0;
+
+            img
+                height: 2.4rem;
+                relative: top 1.2rem;
+
+        .dropdown .menu
+            top: 3.2rem;
+
+    &.sidebar
+        @extend .pv3, .ph6;
+        z-index: 3000;
+        position: fixed;
+        bottom: 0;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 300px;
+        background-color: $color.smoke;
+
+        & > .item, & .options > .item
+            @extend .pv1, .ph0;
+            display: block;
+            font-weight: 500;
+            color: $textColor.body;
+
+            &.active
+                font-weight: 600;
+
+            & + .item
+                @extend .m0;
+
+        .list
+            @extend .pl3, .mb2;
+
+            .item
+                @extend .pv1;
+                font-weight: 400;
+                display: block;
+                font-size: $fontSize.sub;
+                @extend .link;
+                @extend .link.link-light;
+
+    &.scrollable
+        white-space: nowrap;
+
+    &.footer
+        display: flex;
+
+        .list
+            flex-basis: 0;
+            flex-grow: 1;
+            max-width: 100%;
+
+            .item
+                @extend .p0;
+                display: block;
+
+                & + .item
+                    @extend .ml0;
+
+                &.header
+                    font-size: $fontSize.h6;
+
+            .item:not(.header)
+                & > a
+                    font-size: $fontSize.body;
+                    font-weight: $fontWeight.book;
+                    @extend .link;
+                    @extend .link.link-body;

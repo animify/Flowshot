@@ -1,0 +1,59 @@
+.link
+    text-decoration: none;
+    color: $color.base;
+    position: relative;
+
+    &:hover
+        color: darken(@color, 12%);
+
+    &:active
+        color: darken(@color, 24%);
+
+    &.link-underline
+        &:before
+            border-bottom: 1px solid @color;
+            opacity: .64;
+            width: 100%;
+            content: ' ';
+            absolute: bottom -1px left;
+
+    &.link-body
+        color: $textColor.body;
+
+        &.link-underline
+            &:before
+                border-color: @color;
+
+        &:hover
+            color: $textColor.heading;
+
+        &:active
+            color: $color.black;
+
+    for $text in 'light' 'heading'
+        &.link-{$text}
+            color: $textColor[$text];
+
+            &.link-underline
+                &:before
+                    border-color: @color;
+
+            &:hover
+                color: darken(@color, 12%);
+
+            &:active
+                color: darken(@color, 24%);
+
+    for $ui in 'positive' 'negative' 'warning' 'info'
+        &.link-{$ui}
+            color: $uiColor[$ui];
+
+            &.link-underline
+                &:before
+                    border-color: @color;
+
+            &:hover
+                color: darken(@color, 12%);
+
+            &:active
+                color: darken(@color, 24%);

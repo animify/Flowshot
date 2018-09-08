@@ -1,0 +1,69 @@
+.label
+    @extend .pv1, .ph3;
+    position: relative;
+    display: inline-block;
+    border: 0;
+    border-radius: $borderRadius.base;
+    background-color: $color.base;
+    color: $color.white;
+    font-weight: $fontWeight.bold;
+    font-size: $fontSize.sub;
+
+    &.circular
+        @extend .p1;
+        border-radius: 50%;
+        width: 2.4rem;
+        height: 2.4rem;
+        line-height: 1.6rem;
+        text-align: center;
+
+    .detail
+        @extend .pv1, .ph3, .n-mv1, .n-mr3, .ml3;
+        background-color: rgba(0, 0, 0, .1);
+        height: 100%;
+        border-radius: 0 $borderRadius.base $borderRadius.base 0;
+        display: inline-block;
+        font-weight: 500;
+        vertical-align: top;
+        color: rgba(255, 255, 255, .7);
+
+    a
+        @extend .ml2, .pl2;
+        color: #fff;
+        font-weight: 600;
+        text-transform: none;
+        border-left: 2px solid rgba(0, 0, 0, .1);
+
+    &.check
+        width: 12px;
+        height: 6px;
+        relative: top -4px;
+        border: 3px solid $color.base;
+        border-radius: 0;
+        border-top: none;
+        border-right: none;
+        background: none;
+        transform: rotate(-45deg);
+        padding: 0;
+
+    &.cross
+        @extend .p0;
+        position: relative;
+        width: 12px;
+        height: 12px;
+        border-radius: 0;
+        background: none;
+
+        &::before, &::after
+            width: 0;
+            height: 100%;
+            content: ' ';
+            display: block;
+            absolute: right 6px;
+            border-left: 3px solid $color.base;
+
+        &::before
+            transform: rotate(45deg);
+
+        &::after
+            transform: rotate(-45deg);

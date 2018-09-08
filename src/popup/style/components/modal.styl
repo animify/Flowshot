@@ -1,0 +1,95 @@
+.modal-container
+    fixed: top left;
+    width: 100%;
+    height: 100%;
+    z-index: 3000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 140ms ease;
+
+    & > .background
+        fixed: top left;
+        display: block;
+        content: ' ';
+        width: 100%;
+        height: 100%;
+        background-color: transparent;
+        will-change: background-color;
+        transition: background-color 140ms ease;
+
+    & > .modal-x
+        display: block;
+        fixed: top 3.2rem right 3.2rem;
+        height: 4rem;
+        width: 4rem;
+        background-color: $color.smoke;
+        border-radius: 50%;
+        content: ' ';
+        will-change: transform, opacity;
+        transform: scale(0);
+        opacity: 0;
+        transition: transform 140ms ease, opacity 140ms ease;
+
+    & > .modal
+        position: relative;
+        z-index: 3050;
+        width: fit-content;
+        max-width: 640px;
+        min-width: 520px;
+        background-color: $color.white;
+        border-radius: $borderRadius.base;
+        box-shadow: $boxShadow.distant;
+        will-change: transform, opacity;
+        transform: scale(0);
+        opacity: 0;
+        transition: transform 140ms ease, opacity 140ms ease;
+
+        & > .header, & > .body, & > .footer
+            @extend .ph8;
+
+        & > .header
+            @extend .pv6;
+
+        & > .body
+            @extend .pb6;
+
+        & > .footer
+            @extend .pv5;
+            background-color: $color.snow;
+            border-radius: 0 0 $borderRadius.base ((($borderRadius.base)));
+
+            .subtext
+                @extend .mt5;
+                display: block;
+
+    &.overlay
+        & > .modal
+            background-color: transparent;
+            border-radius: 0;
+            box-shadow: none;
+
+            & > .footer
+                @extend .pt0;
+                background-color: transparent;
+                border-radius: 0;
+
+    &.open
+        pointer-events: auto;
+        opacity: 1;
+
+        &:not(.overlay) > .background
+            background-color: rgba($color.black, .4);
+
+        &.overlay > .background
+            background-color: $color.white;
+
+        & > .modal-x
+            transform: scale(1);
+            opacity: 1;
+
+        & > .modal
+            transform: scale(1);
+            opacity: 1;

@@ -1,0 +1,83 @@
+.list
+    & .list
+        @extend .m0, .p0, .mt3, .pl4;
+
+    li, .item
+        @extend .m0, .mb3;
+        color: $textColor.body;
+        font-size: $fontSize.body;
+        line-height: $lineHeight.body;
+        transition: padding 140ms ease, border-left 140ms ease;
+
+        a
+            font-weight: $fontWeight.semiBold;
+            @extend .link;
+            @extend .link.link-body;
+
+        &.header
+            display: block;
+            font-weight: $fontWeight.semiBold;
+
+        &.active
+            padding-left: 1.6rem;
+            border-left: 3px solid $color.base;
+
+            a
+                color: $color.base;
+
+    &.ordered
+        counter-reset: orderedListItem;
+
+        .list
+            counter-reset: orderedListItem;
+
+        li, .item
+            list-style: none;
+
+            &:before
+                @extend .mr1;
+                content: counters(orderedListItem, '.') ' ';
+                counter-increment: orderedListItem;
+                opacity: .64;
+
+        ol&
+            li[value], .item[value]
+                &:before
+                    margin-right: .8rem;
+                    content: attr(value);
+
+    &.bulleted
+        @extend .pl3;
+
+        li, .item
+            position: relative;
+
+            &:before
+                @extend .n-ml3;
+                absolute: left auto top;
+                content: '\2022';
+                opacity: .64;
+
+    &.divided
+        max-width: 36rem;
+
+        &.block
+            max-width: none;
+            width: 100%;
+
+        li, .item
+            @extend .pv2;
+            margin: 0;
+            border-bottom: 1px solid $color.dim;
+
+            a
+                display: inline-block;
+                float: right;
+
+    &.horizontal
+        li, .item
+            display: inline-block;
+            margin: 0;
+
+            & + li, & + .item
+                @extend .ml6;

@@ -1,0 +1,290 @@
+.clearfix
+    cf();
+
+.stackable > *
+    stack();
+
+.stack
+    stack();
+
+.unstack
+    unstack();
+
+.block, .shown
+    display: block !important;
+
+.inline
+    display: inline-block !important;
+
+.relative
+    position: relative;
+
+.fixed
+    position: fixed;
+
+.absolute
+    position: absolute;
+
+.static
+    position: static;
+
+.fixed, .absolute
+    &.top
+        top: 0;
+
+    &.left
+        left: 0;
+
+    &.right
+        right: 0;
+
+    &.bottom
+        bottom: 0;
+
+.hidden
+    display: none !important;
+
+.visible
+    visibility: visible !important;
+
+.invisible
+    visibility: hidden !important;
+
+.borderless
+    border: 0 !important;
+
+.centered
+    &:not(.vertical):not(.horizontal)
+        align(both);
+
+    &.vertical
+        align(vertical);
+
+    &.horizontal
+        align(horizontal);
+
+.nowrap
+    white-space: nowrap;
+
+.capitalize
+    text-transform: capitalize;
+
+.text
+    &-truncate
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+
+    &-right
+        text-align: right;
+
+    &-left
+        text-align: left;
+
+    &-center
+        text-align: center;
+
+    &-justify
+        text-align: justify;
+
+        &:after
+            display: inline-block;
+            content: '';
+            width: 100%;
+
+.font-weight
+    &-book
+        font-weight: $fontWeight.book;
+
+    &-semibold
+        font-weight: $fontWeight.semiBold;
+
+    &-bold
+        font-weight: $fontWeight.bold;
+
+    &-black
+        font-weight: $fontWeight.black;
+
+.float
+    &-left
+        float: left;
+
+    &-right
+        float: right;
+
+    &-none
+        float: none;
+
+.valign
+    &-top
+        vertical-align: top;
+
+    &-middle
+        vertical-align: middle;
+
+    &-bottom
+        vertical-align: bottom;
+
+    &-baseline
+        vertical-align: baseline;
+
+    &-text-top
+        vertical-align: text-top;
+
+    &-text-bottom
+        vertical-align: text-bottom;
+
+.center
+    align(both);
+
+    &-horizontal
+        align(horizontal);
+
+    &-vertical
+        align(vertical);
+
+.transform
+    &.uppercase
+        text-transform: uppercase;
+
+    &.lowercase
+        text-transform: lowercase;
+
+    &.capitalize
+        text-transform: capitalize;
+
+.circle
+    border-radius: 50%;
+
+.shadowless
+    box-shadow: none !important;
+
+.flex
+    display: flex !important;
+
+    &-auto
+        flex: 1 1 auto;
+        min-width: 0;
+        min-height: 0;
+
+    &-none
+        flex: none;
+
+    &-column
+        flex-direction: column;
+
+    &-row
+        flex-direction: row;
+
+    &-wrap
+        flex-wrap: wrap;
+
+    &-nowrap
+        flex-wrap: nowrap;
+
+    &-wrap-reverse
+        flex-wrap: wrap-reverse;
+
+    &-column-reverse
+        flex-direction: column-reverse;
+
+    &-row-reverse
+        flex-direction: row-reverse;
+
+.align
+    &-start
+        align-items: flex-start;
+
+    &-end
+        align-items: flex-end;
+
+    &-center
+        align-items: center;
+
+    &-baseline
+        align-items: baseline;
+
+    &-stretch
+        align-items: stretch;
+
+.self
+    &-start
+        align-self: flex-start;
+
+    &-end
+        align-self: flex-end;
+
+    &-center
+        align-self: center;
+
+    &-baseline
+        align-self: baseline;
+
+    &-stretch
+        align-self: stretch;
+
+.justify
+    &-start
+        justify-content: flex-start;
+
+    &-end
+        justify-content: flex-end;
+
+    &-center
+        justify-content: center;
+
+    &-between
+        justify-content: space-between;
+
+    &-around
+        justify-content: space-around;
+
+.content
+    &-start
+        align-content: flex-start;
+
+    &-end
+        align-content: flex-end;
+
+    &-center
+        align-content: center;
+
+    &-between
+        align-content: space-between;
+
+    &-around
+        align-content: space-around;
+
+    &-stretch
+        align-content: stretch;
+
+.order
+    &-0
+        order: 0;
+
+    &-1
+        order: 1;
+
+    &-2
+        order: 2;
+
+    &-3
+        order: 3;
+
+    &-4
+        order: 4;
+
+    &-5
+        order: 5;
+
+    &-6
+        order: 6;
+
+    &-7
+        order: 7;
+
+    &-8
+        order: 8;
+
+    &-last
+        order: 99999;

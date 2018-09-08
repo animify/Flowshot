@@ -1,0 +1,32 @@
+.container
+    center($containerWidth, $containerPadding);
+    cf();
+
+    &.fluid
+        width: 100%;
+        max-width: none;
+
+    &.split
+        display: flex;
+        justify-content: flex-start;
+
+        .sidebar
+            flex-shrink: 0;
+            width: intrinsic;
+            width: -moz-max-content;
+            width: -webkit-max-content;
+            min-width: 160px;
+
+            & + .body
+                margin-left: 10rem;
+
+        .body
+            min-width: 0;
+            flex-grow: 1;
+
+            & + .sidebar
+                margin-left: 10rem;
+
+.cover
+    width: 100%;
+    height: 100%;

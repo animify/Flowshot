@@ -1,0 +1,48 @@
+styleSized(size)
+    if (size == 'tiny')
+        height: .2rem;
+
+    if (size == 'small')
+        height: .8rem;
+
+    if (size == 'medium')
+        height: 2.2rem;
+
+    if (size == 'large')
+        height: 2.8rem;
+
+        .status
+            font-size: $fontSizeBody;
+            line-height: 2.8rem;
+
+.progress
+    cf();
+    height: 1rem;
+    border-radius: $borderRadius.base;
+    background-color: $color.snow;
+    content: '';
+
+    .bar
+        position: relative;
+        width: 0;
+        height: 100%;
+        border-radius: $borderRadius.base;
+        background-color: $color.base;
+
+        .status
+            absolute: right .8rem;
+            display: none;
+            color: $color.white;
+            font-weight: $fontWeight.bold;
+            font-size: $fontSize.small;
+            line-height: 1.6rem;
+
+
+    for size in $sizeList
+        &.{size}
+            styleSized(size);
+
+    &:not(.tiny):not(.small)
+        .bar.show-status
+            .status
+                display: block;

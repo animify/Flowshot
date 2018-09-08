@@ -1,4 +1,8 @@
-const path = require("path");
+const path = require('path');
+const webpack = require('webpack');
+const nib = require('nib');
+const jeet = require('jeet');
+const rupture = require('rupture');
 
 module.exports = {
     mode: "development",
@@ -22,21 +26,33 @@ module.exports = {
             },
             {
                 exclude: /node_modules/,
-                test: /\.scss$/,
+                test: /\.styl$/,
                 use: [
+                    'style-loader',
+                    'css-loader',
                     {
-                        loader: "style-loader" // Creates style nodes from JS strings
+                        loader: 'stylus-loader'
                     },
-                    {
-                        loader: "css-loader" // Translates CSS into CommonJS
-                    },
-                    {
-                        loader: "sass-loader" // Compiles Sass to CSS
-                    }
-                ]
+                ],
+            },
+            {
+                test: /\.(png|eot|svg|ttf|woff|woff2)$/,
+                loader: 'file-loader?name=[name].[ext]'
             }
         ]
     },
+
+    plugins: [
+        new webpack.LoaderOptionsPlugin({
+            options: {
+                stylus: {
+                    use: [nib(), jeet(), rupture()]
+                },
+                context: '/'
+            }
+        }),
+    ],
+
     resolve: {
         extensions: [".ts", ".tsx", ".js"]
     }

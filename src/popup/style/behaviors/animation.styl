@@ -1,0 +1,35 @@
+.animation
+    &.spin
+        animation: spin $durationXXXL infinite linear;
+
+    &.rotate
+        animation: spin $durationXXXXL $durationXXXXL infinite cubic-bezier(.04, .95, .17, 1);
+
+    &.bounce
+        animation: bounce $durationXXXL infinite cubic-bezier(.04, .95, .17, 1);
+
+    &.pulse
+        animation: pulse $durationXXXL infinite linear;
+
+    &.shake
+        animation: shake $durationXXXL infinite linear;
+
+    &.swing
+        transform-origin: 50% 0;
+        animation: swing $durationXXXXL infinite linear;
+
+    &.spring
+        animation: spring $durationL cubic-bezier(.04, .95, .17, 1);
+
+.landing
+    &.fadein
+        animation: fadein $durationXL linear forwards;
+        opacity: 0;
+
+    &.ascend
+        animation: ascend $durationXL linear forwards;
+        opacity: 0;
+
+    &.descend
+        animation: descend $durationXL linear forwards;
+        opacity: 0;

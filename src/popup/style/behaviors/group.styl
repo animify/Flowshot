@@ -1,0 +1,16 @@
+.group
+    font-size: 0;
+
+    .button
+        margin: 0 !important;
+        border-radius: 0;
+
+        &.outlined
+            & + .outlined
+                margin-left: -1px !important;
+
+        &:first-of-type
+            border-radius: $borderRadius.base 0 0 (((((($borderRadius.base))))));
+
+        &:last-of-type
+            border-radius: 0 $borderRadius.base $borderRadius.base 0;

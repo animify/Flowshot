@@ -1,0 +1,73 @@
+.dropdown
+    position: relative;
+    display: inline-block;
+
+    .toggle
+        user-select: none;
+
+    .menu
+        @extend .pv2;
+        absolute: top 3.2rem left 0;
+        z-index: 800;
+        min-width: 21.6rem;
+        border: 1px solid $color.dim;
+        border-radius: $borderRadius.base;
+        background-color: $color.white;
+        box-shadow: 0 1px 4px rgba(0, 0, 31, .1), 0 4px 14px rgba(0, 0, 31, .08);
+        display: none;
+
+        li, a
+            display: block;
+            color: $textColor.body;
+            line-height: $lineHeight.body;
+            font-weight: $fontWeight.book;
+
+        li
+            &.divider
+                @extend .mv2, .ph4;
+                background-color: $color.dim;
+                height: 1px;
+                width: 100%;
+                content: ' ';
+
+            &.header
+                color: $textColor.heading;
+                font-weight: $fontWeight.bold;
+                font-size: $fontSize.body;
+                @extend .pv1, .ph4;
+
+            a
+                @extend .pv1, .ph4;
+
+            &:not(.header):not(.divider):hover
+                background-color: $color.snow;
+
+                a
+                    color: $textColor.heading;
+
+            &:not(.header):not(.divider):active
+                background-color: $color.dim;
+
+                a
+                    color: $textColor.heading;
+
+            +disabled()
+                color: $color.body !important;
+
+    &.open
+        .menu
+            display: block;
+
+    &.floating
+        .menu
+            @extend .mt3;
+
+    &.right
+        .menu
+            right: 0;
+            left: auto;
+
+    &.upward
+        .menu
+            top: auto;
+            bottom: 3.2rem;

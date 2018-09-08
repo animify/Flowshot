@@ -1,0 +1,146 @@
+.tooltip[tooltip-text]
+    position: relative;
+
+    &:before
+        position: absolute;
+        z-index: 18;
+        width: 1.2em;
+        height: 1.2em;
+        background-color: $color.gunmetal;
+        content: ' ';
+        opacity: 0;
+        transition: transform cubic-bezier(.02, .49, .01, .97) 140ms, opacity ease 70ms;
+        transform: rotate(45deg) scale(0);
+        transform-origin: center;
+        will-change: transform, opacity;
+        border-radius: 2px;
+
+    &:after
+        @extend .pv1, .ph2;
+        position: absolute;
+        z-index: 20;
+        border-radius: $borderRadius.base;
+        background-color: $color.gunmetal;
+        color: $color.white;
+        font-size: $fontSize.small;
+        font-weight: $fontWeight.semiBold;
+        content: attr(tooltip-text);
+        text-align: left;
+        white-space: nowrap;
+        cursor: default;
+        transition: transform cubic-bezier(.02, .49, .01, .97) 140ms, opacity ease 70ms;
+        transform: scale(0);
+        pointer-events: none;
+        will-change: transform, opacity;
+        max-width: none;
+        transform-origin: left bottom;
+
+    &.dark
+        &:before
+            background-color: $color.gunmetal;
+            box-shadow: none !important;
+
+        &:after
+            border-color: $color.gunmetal;
+            background-color: $color.gunmetal;
+            color: $color.white;
+
+    &:hover
+        &:before
+            opacity: 1;
+            transform: rotate(45deg) scale(1);
+
+        &:after
+            transform: scale(1);
+
+    for size in $sizeList
+        &[tooltip-size={size}]
+            &:after
+                font-size: $variantFontSize[size];
+
+    &:not([tooltip-position])
+        &:before
+            @extend .mb1;
+            absolute: bottom 100% left 1.2em;
+
+        &:after
+            @extend .mb2;
+            absolute: left 0 bottom 100%;
+
+    &[tooltip-position~=top]
+        &:before
+            @extend .mb1;
+            bottom: 100%;
+
+        &:after
+            @extend .mb2;
+            bottom: 100%;
+
+    &[tooltip-position~=left]
+        &:before
+            left: 1.2em;
+
+    &[tooltip-position~=right]
+        &:before
+            right: 1.2em;
+
+    &[tooltip-position~=bottom]
+        &:before
+            @extend .mt1;
+            top: 100%;
+
+        &:after
+            @extend .mt2;
+            top: 100%;
+
+    &[tooltip-position='top left']
+        &:after
+            right: auto;
+            left: 0;
+            transform-origin: left bottom;
+
+    &[tooltip-position='top center']
+        &:before
+            left: 50%;
+
+        &:after
+            left: 50%;
+            transform: translateX(-50%) scale(0);
+            transform-origin: center bottom;
+
+        &:hover
+            &:after
+                transform: translateX(-50%) scale(1);
+
+            &:before
+                transform: rotate(45deg) scale(1);
+
+    &[tooltip-position='top right']
+        &:after
+            right: 0;
+            left: auto;
+            transform-origin: right bottom;
+
+    &[tooltip-position='bottom left']
+        &:after
+            right: auto;
+            left: 0;
+            transform-origin: left top;
+
+    &[tooltip-position='bottom center']
+        &:before
+            left: 50%;
+
+        &:after
+            left: 50%;
+            transform: translateX(-50%) scale(0);
+            transform-origin: center top;
+
+        &:hover:after
+            transform: translateX(-50%) scale(1);
+
+    &[tooltip-position='bottom right']
+        &:after
+            right: 0;
+            left: auto;
+            transform-origin: right top;

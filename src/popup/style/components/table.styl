@@ -1,0 +1,39 @@
+.table
+    border-collapse: separate;
+    border-radius: $borderRadius.base;
+
+    th
+        @extend .pv2, .ph3;
+        border-bottom: 1px solid darken($color.dim, 20%);
+        font-weight: $fontWeight.semiBold;
+        color: $textColor.heading;
+
+    td
+        @extend .pv2, .ph3;
+        border-bottom: 1px solid $color.dim;
+
+    tr:last-child td
+        border-bottom: 0;
+
+    &.basic
+        th, tr
+            background-color: transparent;
+
+    &.celled
+        th, tr td
+            border-left: 1px solid $color.dim;
+
+            &:first-child
+                border-left: 0;
+
+    &.simple
+        th
+            background-color: transparent;
+
+    &.striped
+        tbody
+            tr
+                background-color: $color.snow;
+
+                &:nth-child(2n)
+                    background-color: transparent;

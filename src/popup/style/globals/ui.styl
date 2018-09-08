@@ -1,0 +1,66 @@
+html {
+    font-size: 62.5%;
+}
+
+html, body {
+    height: 100%;
+    width: 100%;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: $color.white;
+    color: $textColor.body;
+    font-family: $fontFamily.body;
+    font-size: $fontSize.body;
+    line-height: $lineHeight.body;
+    letter-spacing: 0.1px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    width: 354px;
+}
+
+for h in (1 .. 4) {
+    h{h} {
+        font-size: $fontSize['h' + h];
+        letter-spacing: $letterSpacing['h' + h];
+        font-family: $fontFamily.header;
+        font-weight: $fontWeight.black;
+        color: $textColor.heading;
+        line-height: $lineHeight.body;
+
+        if (h < 4) {
+            letter-spacing: -0.2px;
+        }
+    }
+}
+
+a {
+    text-decoration: none;
+    color: $color.base;
+    cursor: pointer;
+
+    &:hover {
+        color: darken($color.base, $variationColors);
+    }
+
+    &:active {
+        color: darken($color.base, 24);
+    }
+}
+
+small, .small {
+    font-size: $fontSize.small;
+    letter-spacing: 0.024rem;
+}
+
+strong, .strong {
+    font-weight: $fontWeight.bold;
+}
+
+footer {
+    margin-top: 5rem;
+    background-color: $color.smoke;
+    padding: 3.6rem 0;
+}

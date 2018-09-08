@@ -1,0 +1,17 @@
+for $breakpoint in $breakpointIdentifiers
+    +below($breakpoint)
+        .hidden\\\@{$breakpoint}
+            display: none;
+
+        .visible\\\@{$breakpoint}
+            display: block;
+
+        .stack\\\@{$breakpoint}
+            stack();
+            margin: 0;
+            padding: 0;
+
+        .stackable\\\@{$breakpoint} > *
+            stack();
+            margin: 0;
+            padding: 0;

@@ -18,6 +18,17 @@
         "48": "icon48.png",
         "128": "icon128.png"
     },
+    "content_scripts": [
+        {
+            "matches": [
+                "http://*/*",
+                "https://*/*"
+            ],
+            "js": [
+                "js/contentScript.js"
+            ]
+        }
+    ],
     "web_accessible_resources": [
         "js/clientScript.js"
     ],

@@ -1,4 +1,6 @@
 chrome.runtime.onMessage.addListener((request, sender, respond) => {
+    console.log('Got request', request);
+
     switch (true) {
         case request.record:
             document.addEventListener('flowshot-message', (event: CustomEvent) => {

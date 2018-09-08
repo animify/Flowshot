@@ -94,7 +94,7 @@ export default class Popup extends React.Component<AppProps, AppState> {
                         :
                         <React.Fragment>
                             <h2>Let's get started</h2>
-                            <p className="mb6">Start off your session and start keep browsing the web. When done, end your session and download your Overflow file.</p>
+                            <p className="mb6">Start off your session and continue browsing the web. When done, end your session and download your Overflow file.</p>
                         </React.Fragment>
                     }
                 </div>
@@ -102,12 +102,12 @@ export default class Popup extends React.Component<AppProps, AppState> {
                 <div className="pb5 ph6 flex flex-noshrink mtauto">
                     {isRecording ?
                         <React.Fragment>
-                            <a className="button black flex-grow" onClick={() => this.setRecordingState(RecordingStatus.discarded)}>Discard</a>
-                            <a className="ml4 button red flex-grow" onClick={() => this.setRecordingState(RecordingStatus.stopped)}>Stop &amp; Save...</a>
+                            <a className="button red flex-grow" onClick={() => this.setRecordingState(RecordingStatus.discarded)}>Discard</a>
+                            <a className="ml4 button black flex-grow" onClick={() => this.setRecordingState(RecordingStatus.stopped)}>Build your flow...</a>
                         </React.Fragment>
                         :
                         <React.Fragment>
-                            <a className="button green flex-grow" onClick={() => this.setRecordingState(RecordingStatus.started)}>Start Session</a>
+                            <a className="button green flex-grow" onClick={() => this.setRecordingState(RecordingStatus.started)}>Begin Session</a>
                         </React.Fragment>
                     }
                 </div>

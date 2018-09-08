@@ -4,13 +4,14 @@ export interface Recording {
 }
 
 export interface RecordingEvent {
+    tab: string;
+    image: string;
     bounds: {
         pageX: number;
         pageY: number;
         clientX: number;
         clientY: number;
     }
-    image: string;
 }
 
 export enum RecordingStatus {
@@ -21,4 +22,10 @@ export enum RecordingStatus {
 export enum ChromeTabStatus {
     'loading' = 'loading',
     'complete' = 'complete',
+}
+
+declare global {
+    interface Window {
+        FlowshotEvent: any;
+    }
 }

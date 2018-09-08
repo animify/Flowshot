@@ -1,12 +1,10 @@
 import { Utils } from "./Utils";
 import { ChromeTabStatus } from "./types";
 
-console.log = console.log.bind(null, '%c Flowshot:', 'font-weight: bold; color: #000');
+console.log = console.log.bind(null, '%c Flowshot Background:', 'font-weight: bold; color: #000');
 
-// Listen to messages sent from other parts of the extension.
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-    // onMessage must return "true" if response is async.
-    let isResponseAsync = true;
+    console.log('Handling request - ', request);
 
     switch (true) {
         case request.popupMounted:
@@ -16,42 +14,39 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
             console.log('Capturing page');
             break;
         case request.click:
-            const payload = request.payload;
-            console.log('Got payload', payload)
-            chrome.tabs.captureVisibleTab(null,
-                { format: 'png', quality: 100 }, (dataURI) => {
-                    if (dataURI) {
-                        const fauxImage = new Image();
-                        fauxImage.src = dataURI;
-                        fauxImage.onload = () => {
-                            console.log('Built image', fauxImage);
-
-                            chrome.runtime.sendMessage({
-                                type: 'newImage', payload: {
-                                    title: 'any',
-                                    date: Date.now(),
-                                    dataURI,
-                                    bounds: {
-                                        h: fauxImage.height,
-                                        w: fauxImage.width,
-                                    }
+            chrome.tabs.captureVisibleTab(null, { format: 'png', quality: 100 }, (dataURI) => {
+                if (!dataURI) return;
+                const fauxImage = new Image();
+                fauxImage.src = dataURI;
+                fauxImage.onload = () => {
+                    console.log('Built image');
+                    Utils.getCurrentTab().then((tab) => {
+                        chrome.runtime.sendMessage({
+                            type: 'newImage', payload: {
+                                title: 'any',
+                                tab: tab.title,
+                                date: Date.now(),
+                                dataURI,
+                                bounds: {
+                                    h: fauxImage.height,
+                                    w: fauxImage.width,
                                 }
-                            });
-                        }
-                    }
-                });
-            break;
-        default:
-            console.log('Background Request - ', request);
+                            }
+                        });
+                    });
+                }
+            });
             break;
     }
 
-    return isResponseAsync;
+    return true;
 });
 
 chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
-    window.console.log('updated from background', changeInfo);
+    console.log('Tabs updating', tabId, changeInfo);
+
     if (changeInfo.status === ChromeTabStatus.complete) {
+        console.log('Injecting script into', tab.title);
         Utils.executeScript(tabId, { file: 'js/clientScript.js' });
     }
 });

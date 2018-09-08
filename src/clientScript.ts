@@ -1,32 +1,45 @@
+import EventBus from './EventBus';
+
 class FlowshotClient {
     constructor() {
-        console.log('Flowshot Client:', 'Client Script injected.')
+        console.debug = console.debug.bind(null, '%c Flowshot Client:', 'font-weight: bold; color: #ffcc00');
+
+        if (!window.FlowshotEvent) {
+            window.FlowshotEvent = new EventBus();
+            console.debug('Setting EventBus');
+        }
+
+        console.debug('Script injected');
         this.attachMessageListeners();
         this.attachClickListener();
     }
 
     attachMessageListeners() {
-        document.addEventListener('flowshot-message', (event: CustomEvent) => {
-            switch (true) {
-                case event.detail.stopRecording:
-                    console.log('stopped recording')
-                    this.detachClickListener();
-                    break;
-            }
-        });
+        window.FlowshotEvent.remove('flowshot-message.flowshot');
+        window.FlowshotEvent.add('flowshot-message.flowshot', this.handleMessage.bind(this));
+    }
+
+    handleMessage(payload: any) {
+        switch (true) {
+            case payload.stopRecording:
+                console.debug('Stopped recording')
+                this.detachClickListener();
+                break;
+        }
     }
 
     detachClickListener() {
-        document.body.removeEventListener('click', this.onClick);
+        window.FlowshotEvent.remove('click.flowshot', this.onClick);
     }
 
     attachClickListener() {
         this.detachClickListener();
-        document.body.addEventListener('click', this.onClick);
+        window.FlowshotEvent.add('click.flowshot', this.onClick);
     }
 
+
     onClick(e: MouseEvent) {
-        console.log('onclick', e);
+        console.debug('Click event - ', e);
         document.dispatchEvent(new CustomEvent('flowshot-message', {
             detail: {
                 click: true,

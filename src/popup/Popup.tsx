@@ -56,8 +56,8 @@ export default class Popup extends React.Component<AppProps, AppState> {
     }
 
     startRecording = () => {
-        Utils.getCurrentTab().then((tabId) => {
-            chrome.tabs.sendMessage(tabId, { record: true });
+        Utils.getCurrentTab().then((tab) => {
+            chrome.tabs.sendMessage(tab.id, { record: true });
 
             this.setState({
                 recording: true
@@ -66,8 +66,8 @@ export default class Popup extends React.Component<AppProps, AppState> {
     }
 
     stopRecording = () => {
-        Utils.getCurrentTab().then((tabId) => {
-            chrome.tabs.sendMessage(tabId, { stopRecord: true });
+        Utils.getCurrentTab().then((tab) => {
+            chrome.tabs.sendMessage(tab.id, { stopRecord: true });
 
             this.setState({
                 recording: false
@@ -105,7 +105,7 @@ export default class Popup extends React.Component<AppProps, AppState> {
                         </React.Fragment>
                     }
                 </div>
-                {screenshots.map(s => <img height={s.bounds.h / 4} width={s.bounds.w / 4} src={s.dataURI} />)}
+                {screenshots.map(s => <img key={s.date} height={140} src={s.dataURI} />)}
             </div>
         )
     }

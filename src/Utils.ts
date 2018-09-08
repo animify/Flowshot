@@ -1,11 +1,11 @@
 export class Utils {
-    static getCurrentTab(): Promise<number> {
+    static getCurrentTab(): Promise<chrome.tabs.Tab> {
         return new Promise((resolve) => {
             chrome.tabs.query({
                 active: true,
                 currentWindow: true,
             }, (tabs) => {
-                return resolve(tabs[0].id);
+                return resolve(tabs[0]);
             });
         })
     }

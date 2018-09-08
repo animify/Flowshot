@@ -93,7 +93,7 @@ export default class Popup extends React.Component<AppProps, AppState> {
                         </React.Fragment>
                         :
                         <React.Fragment>
-                            <h2>Let's get started</h2>
+                            <h2>Let's get started.</h2>
                             <p className="mb6">Start off your session and continue browsing the web. When done, end your session and download your Overflow file.</p>
                         </React.Fragment>
                     }
@@ -107,7 +107,7 @@ export default class Popup extends React.Component<AppProps, AppState> {
                         </React.Fragment>
                         :
                         <React.Fragment>
-                            <a className="button green flex-grow" onClick={() => this.setRecordingState(RecordingStatus.started)}>Begin Session</a>
+                            <a className="button green flex-grow" onClick={() => this.setRecordingState(RecordingStatus.started)}>Begin new session</a>
                         </React.Fragment>
                     }
                 </div>

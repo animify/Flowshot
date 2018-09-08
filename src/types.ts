@@ -1,3 +1,5 @@
+import EventBus from './EventBus';
+
 export interface Recording {
     status: RecordingStatus;
     events: RecordingEvent[];
@@ -17,6 +19,7 @@ export interface RecordingEvent {
 export enum RecordingStatus {
     'stopped' = 0,
     'started' = 1,
+    'discarded' = 2,
 }
 
 export enum ChromeTabStatus {
@@ -26,6 +29,6 @@ export enum ChromeTabStatus {
 
 declare global {
     interface Window {
-        FlowshotEvent: any;
+        FlowshotEvents: EventBus;
     }
 }

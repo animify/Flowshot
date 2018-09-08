@@ -1,11 +1,12 @@
 import * as React from 'react';
 import { Utils } from '../Utils';
 import './style/stylekit.styl';
+import { RecordingStatus } from '../types';
 
 interface AppProps { }
 
 interface AppState {
-    recording: boolean;
+    recording: RecordingStatus;
     screenshots: Screenshot[];
 }
 
@@ -21,7 +22,7 @@ interface Screenshot {
 
 export default class Popup extends React.Component<AppProps, AppState> {
     state = {
-        recording: false,
+        recording: RecordingStatus.stopped,
         screenshots: []
     }
 
@@ -33,9 +34,9 @@ export default class Popup extends React.Component<AppProps, AppState> {
 
     componentDidMount() {
         chrome.runtime.sendMessage({ popupMounted: true });
-        chrome.storage.local.get(['recording'], (result) => {
+        chrome.storage.local.get(['recordingState'], (result) => {
             this.setState({
-                recording: result.recording
+                recording: result.recordingState as RecordingStatus
             });
         });
     }
@@ -60,59 +61,38 @@ export default class Popup extends React.Component<AppProps, AppState> {
         });
     }
 
-    startRecording = () => {
-        Utils.getCurrentTab().then((tab) => {
-            chrome.tabs.sendMessage(tab.id, { record: true });
 
-            this.setState({
-                recording: true
+    setRecordingState = (status: RecordingStatus) => {
+        Utils.getCurrentTab().then((tab) => {
+            chrome.tabs.sendMessage(tab.id, {
+                changeRecordingState: true,
+                recordingState: status === RecordingStatus.started ? RecordingStatus.started : RecordingStatus.stopped
             });
 
-            chrome.storage.local.set({ recording: true });
-        });
-    }
-
-    stopRecording = () => {
-        Utils.getCurrentTab().then((tab) => {
-            chrome.tabs.sendMessage(tab.id, { stopRecord: true });
+            chrome.storage.local.set({ recordingState: status });
 
             this.setState({
-                recording: false
+                recording: status
             });
-
-            chrome.storage.local.set({ recording: false });
-        });
-    }
-
-    discardRecording = () => {
-        Utils.getCurrentTab().then((tab) => {
-            chrome.tabs.sendMessage(tab.id, { discardRecording: true });
-
-            this.setState({
-                recording: false
-            });
-
-            chrome.storage.local.set({ recording: false });
         });
     }
 
     render() {
         const { screenshots, recording } = this.state;
-        console.log(screenshots);
-
+        const isRecording = recording === RecordingStatus.started;
         return (
             <div className="p6">
                 <div className="text-center">
-                    <h4 className="mb1">{recording ? 'Recording...' : 'Begin your session'}</h4>
-                    <p className="mb4">Hit 'Start Recording' and keep browsing the web like you'd normally do. Once you think you're done, stop the recording and download your Overflow file.</p>
-                    {recording ?
+                    <h4 className="mb1">{isRecording ? 'Recording...' : 'Begin your session'}</h4>
+                    <p className="mb4">Start recording and keep browsing the web like you'd normally do. Once you think you're done, stop the recording and download your Overflow file.</p>
+                    {isRecording ?
                         <React.Fragment>
-                            <a onClick={this.discardRecording} className="button">Discard Recording</a>
-                            <a onClick={this.stopRecording} className="ml4 button red">Stop Recording</a>
+                            <a className="button" onClick={() => this.setRecordingState(RecordingStatus.discarded)}>Discard Recording</a>
+                            <a className="ml4 button red" onClick={() => this.setRecordingState(RecordingStatus.stopped)}>Stop Recording</a>
                         </React.Fragment>
                         :
                         <React.Fragment>
-                            <a onClick={this.startRecording} className="button green">Start Recording</a>
+                            <a className="button green" onClick={() => this.setRecordingState(RecordingStatus.started)}>Start Recording</a>
                         </React.Fragment>
                     }
                 </div>

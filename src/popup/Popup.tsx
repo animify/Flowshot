@@ -1,5 +1,6 @@
 import * as React from 'react';
 import './Popup.scss';
+import { Utils } from '../Utils';
 
 interface AppProps { }
 
@@ -54,56 +55,16 @@ export default class Popup extends React.Component<AppProps, AppState> {
         });
     }
 
-    capture = () => {
-        chrome.tabs.captureVisibleTab(null,
-            { format: 'png', quality: 100 }, (dataURI) => {
-                if (dataURI) {
-                    const fauxImage = new Image();
-                    fauxImage.src = dataURI;
-                    fauxImage.onload = () => {
-                        console.log(fauxImage)
-
-                        this.setState((prevState) => ({
-                            screenshots: [...prevState.screenshots, {
-                                title: 'any',
-                                date: Date.now(),
-                                dataURI,
-                                bounds: {
-                                    h: fauxImage.height,
-                                    w: fauxImage.width,
-                                }
-                            }]
-                        }));
-                    }
-                }
-            });
-        chrome.runtime.sendMessage({ capture: true });
-    }
-
     record = () => {
         const willRecord = !this.state.recording;
 
         if (willRecord) {
-            chrome.tabs.query({
-                active: true,
-                currentWindow: true,
-            }, (tabs) => {
-                chrome.tabs.sendMessage(
-                    tabs[0].id,
-                    { record: true }, (res) => {
-                        chrome.tabs.executeScript(tabs[0].id, { file: 'js/clientScript.js' });
-                    }
-                );
+            Utils.getCurrentTab().then((tabId) => {
+                chrome.tabs.sendMessage(tabId, { record: true });
             });
         } else {
-            chrome.tabs.query({
-                active: true,
-                currentWindow: true,
-            }, (tabs) => {
-                chrome.tabs.sendMessage(
-                    tabs[0].id,
-                    { stopRecord: true }
-                );
+            Utils.getCurrentTab().then((tabId) => {
+                chrome.tabs.sendMessage(tabId, { stopRecord: true });
             });
         }
 
@@ -119,7 +80,6 @@ export default class Popup extends React.Component<AppProps, AppState> {
         return (
             <div>
                 <a onClick={this.record}>{recording ? 'Stop Recording' : 'Record Session'}</a>
-                <a onClick={this.capture}>Capture</a>
                 {screenshots.map(s => <img height={s.bounds.h / 4} width={s.bounds.w / 4} src={s.dataURI} />)}
             </div>
         )

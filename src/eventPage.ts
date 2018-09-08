@@ -1,9 +1,12 @@
+import { Utils } from "./Utils";
+import { ChromeTabStatus } from "./types";
+
 console.log = console.log.bind(null, '%c Flowshot:', 'font-weight: bold; color: #000');
 
 // Listen to messages sent from other parts of the extension.
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     // onMessage must return "true" if response is async.
-    let isResponseAsync = false;
+    let isResponseAsync = true;
 
     switch (true) {
         case request.popupMounted:
@@ -48,7 +51,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 
 chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
     window.console.log('updated from background', changeInfo);
-    if (changeInfo.status === 'complete') {
-        chrome.tabs.executeScript(tabId, { file: 'js/clientScript.js' });
+    if (changeInfo.status === ChromeTabStatus.complete) {
+        Utils.executeScript(tabId, { file: 'js/clientScript.js' });
     }
 });

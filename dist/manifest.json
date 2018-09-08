@@ -21,21 +21,9 @@
     "web_accessible_resources": [
         "js/clientScript.js"
     ],
-    "content_scripts": [
-        {
-            "matches": [
-                "http://*/*",
-                "https://*/*"
-            ],
-            "js": [
-                "js/contentScript.js"
-            ]
-        }
-    ],
     "permissions": [
-        "*://*/*",
+        "<all_urls>",
         "tabCapture",
-        "tabs",
-        "activeTab"
+        "tabs"
     ]
 }

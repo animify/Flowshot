@@ -4,7 +4,8 @@ import './Popup.scss';
 interface AppProps { }
 
 interface AppState {
-    screenshots: Screenshot[]
+    recording: boolean;
+    screenshots: Screenshot[];
 }
 
 interface Screenshot {
@@ -19,16 +20,38 @@ interface Screenshot {
 
 export default class Popup extends React.Component<AppProps, AppState> {
     state = {
+        recording: false,
         screenshots: []
     }
 
     constructor(props: AppProps, state: AppState) {
         super(props, state);
+
+        this.listen();
     }
 
     componentDidMount() {
         chrome.runtime.sendMessage({ popupMounted: true });
-        this.record();
+    }
+
+    listen() {
+        chrome.runtime.onMessage.addListener((request, sender, respond) => {
+            switch (true) {
+                case request.type === 'newImage':
+                    this.setState((prevState) => ({
+                        screenshots: [...prevState.screenshots, {
+                            title: 'any',
+                            date: Date.now(),
+                            dataURI: request.payload.dataURI,
+                            bounds: {
+                                h: request.payload.height,
+                                w: request.payload.width,
+                            }
+                        }]
+                    }));
+                    break;
+            }
+        });
     }
 
     capture = () => {
@@ -58,45 +81,44 @@ export default class Popup extends React.Component<AppProps, AppState> {
     }
 
     record = () => {
-        console.log('recording');
+        const willRecord = !this.state.recording;
 
-        chrome.tabs.query({
-            active: true,
-            currentWindow: true,
-        }, (tabs) => {
-            chrome.tabs.sendMessage(
-                tabs[0].id,
-                { listen: true }, (res) => {
-                    chrome.tabs.executeScript(tabs[0].id, { file: 'js/clientScript.js' });
-                }
-            );
+        if (willRecord) {
+            chrome.tabs.query({
+                active: true,
+                currentWindow: true,
+            }, (tabs) => {
+                chrome.tabs.sendMessage(
+                    tabs[0].id,
+                    { record: true }, (res) => {
+                        chrome.tabs.executeScript(tabs[0].id, { file: 'js/clientScript.js' });
+                    }
+                );
+            });
+        } else {
+            chrome.tabs.query({
+                active: true,
+                currentWindow: true,
+            }, (tabs) => {
+                chrome.tabs.sendMessage(
+                    tabs[0].id,
+                    { stopRecord: true }
+                );
+            });
+        }
+
+        this.setState({
+            recording: willRecord
         });
     }
 
-    sendMsg = () => {
-        console.log('sending message');
-
-        chrome.tabs.query({
-            active: true,
-            currentWindow: true,
-        }, (tabs) => {
-            console.log(tabs);
-            chrome.tabs.sendMessage(
-                tabs[0].id,
-                { inject: true }, (res) => {
-                    console.log('response', res);
-                }
-            );
-        });
-    };
-
     render() {
-        const { screenshots } = this.state;
+        const { screenshots, recording } = this.state;
         console.log(screenshots);
 
         return (
             <div>
-                <a onClick={this.sendMsg}>Send Message</a>
+                <a onClick={this.record}>{recording ? 'Stop Recording' : 'Record Session'}</a>
                 <a onClick={this.capture}>Capture</a>
                 {screenshots.map(s => <img height={s.bounds.h / 4} width={s.bounds.w / 4} src={s.dataURI} />)}
             </div>

@@ -22,14 +22,33 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
                         fauxImage.src = dataURI;
                         fauxImage.onload = () => {
                             console.log('Built image', fauxImage);
+
+                            chrome.runtime.sendMessage({
+                                type: 'newImage', payload: {
+                                    title: 'any',
+                                    date: Date.now(),
+                                    dataURI,
+                                    bounds: {
+                                        h: fauxImage.height,
+                                        w: fauxImage.width,
+                                    }
+                                }
+                            });
                         }
                     }
                 });
             break;
         default:
-            console.log('Background request - ', request);
+            console.log('Background Request - ', request);
             break;
     }
 
     return isResponseAsync;
+});
+
+chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
+    window.console.log('updated from background', changeInfo);
+    if (changeInfo.status === 'complete') {
+        chrome.tabs.executeScript(tabId, { file: 'js/clientScript.js' });
+    }
 });

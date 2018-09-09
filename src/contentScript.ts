@@ -8,6 +8,18 @@ class FlowshotContent {
 
         chrome.runtime.onMessage.removeListener(FlowshotContent.handleRequest);
         chrome.runtime.onMessage.addListener(FlowshotContent.handleRequest);
+
+        this.runStatus();
+    }
+
+    static runStatus() {
+        chrome.storage.local.get(['recordingState'], (result) => {
+            const state = result.recordingState as RecordingStatus;
+
+            if (state === RecordingStatus.started) {
+                this.startRecording();
+            }
+        });
     }
 
     static handleRequest(request: any, sender: chrome.runtime.MessageSender, respond: any) {

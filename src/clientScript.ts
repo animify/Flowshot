@@ -1,4 +1,5 @@
 import EventBus from './EventBus';
+import { RecordingStatus } from './types';
 
 class FlowshotClient {
     constructor() {
@@ -9,7 +10,20 @@ class FlowshotClient {
         }
 
         console.debug('Script injected');
+
         this.attachMessageListeners();
+        this.runStatus();
+    }
+
+
+    runStatus() {
+        chrome.storage.local.get(['recordingState'], (result) => {
+            const state = result.recordingState as RecordingStatus;
+
+            if (state === RecordingStatus.started) {
+                this.handleMessage({ startRecording: true });
+            }
+        });
     }
 
     attachMessageListeners() {

@@ -48,7 +48,7 @@ export default class Popup extends React.Component<AppProps, AppState> {
     componentDidMount() {
         chrome.runtime.sendMessage({ popupMounted: true });
         chrome.storage.local.get(['recordingState'], (result) => {
-            this.setState({
+            result.recordingState && this.setState({
                 recording: result.recordingState as RecordingStatus
             });
         });
@@ -83,6 +83,7 @@ export default class Popup extends React.Component<AppProps, AppState> {
             });
 
             chrome.storage.local.set({ recordingState: status });
+            chrome.runtime.sendMessage({ recordingState: status });
 
             this.setState({
                 recording: status

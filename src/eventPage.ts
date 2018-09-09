@@ -9,11 +9,11 @@ interface Session {
 }
 
 interface SessionData {
+    date: number;
     screen: {
         tab: string;
-        date: number;
         dataURI: string;
-        bounds: {
+        dimensions: {
             w: number;
             h: number;
         }
@@ -23,6 +23,12 @@ interface SessionData {
         pageY: number;
         screenX: number;
         screenY: number;
+        boundingRect: {
+            x: number;
+            y: number;
+            h: number;
+            w: number;
+        }
     }
 }
 
@@ -58,22 +64,16 @@ class FlowshotMain {
         }
     }
 
-    static saveEvent(request: any) {
+    static saveEvent(clickEvent: SessionData['click']) {
         FlowshotMain.captureCurrentTab().then((payload) => {
-            FlowshotMain.sendToPopup('newImage', payload);
-
-            const { pageX, pageY, screenX, screenY } = request;
             const sessionData: SessionData = {
+                date: Date.now(),
                 screen: payload,
-                click: {
-                    pageX,
-                    pageY,
-                    screenX,
-                    screenY
-                }
+                click: clickEvent
             };
 
             FlowshotMain.currentSession.data.push(sessionData);
+            FlowshotMain.sendToPopup('newImage', payload);
         });
     }
 
@@ -92,9 +92,8 @@ class FlowshotMain {
                     Utils.getCurrentTab().then((tab) => {
                         resolve({
                             tab: tab.title,
-                            date: Date.now(),
                             dataURI,
-                            bounds: {
+                            dimensions: {
                                 h: fauxImage.height,
                                 w: fauxImage.width,
                             }

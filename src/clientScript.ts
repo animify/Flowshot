@@ -57,15 +57,29 @@ class FlowshotClient {
 
     onClick(e: MouseEvent) {
         console.debug('Click event - ', e);
+        let srcElement = e.srcElement;
+        const path = (e as any).path;
+
+        if (path) {
+            srcElement = path.find(e => ['button', 'a'].includes(e.type)) || srcElement;
+        }
+
+        const style = srcElement.getBoundingClientRect()
+        console.debug('style', style)
         document.dispatchEvent(new CustomEvent('fs-request', {
             detail: {
                 click: true,
                 payload: {
-                    type: e.type,
                     pageX: e.pageX,
                     pageY: e.pageY,
                     screenX: e.screenX,
-                    screenY: e.screenY
+                    screenY: e.screenY,
+                    boundingRect: {
+                        x: style.left,
+                        y: style.top,
+                        h: style.height,
+                        w: style.width,
+                    }
                 }
             }
         }));

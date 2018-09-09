@@ -7,7 +7,10 @@
         "outDir": "dist/js",
         "sourceMap": true,
         "jsx": "react",
-        "lib": ["es2015", "dom"],
+        "lib": [
+            "es7",
+            "dom"
+        ],
         "experimentalDecorators": true
     }
 }

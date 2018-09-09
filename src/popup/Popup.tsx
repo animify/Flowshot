@@ -63,10 +63,7 @@ export default class Popup extends React.Component<AppProps, AppState> {
                             title: 'any',
                             date: Date.now(),
                             dataURI: request.payload.dataURI,
-                            bounds: {
-                                h: request.payload.height,
-                                w: request.payload.width,
-                            }
+                            bounds: { ...request.payload.dimensions }
                         }]
                     }));
                     break;

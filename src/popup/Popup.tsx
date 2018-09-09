@@ -20,9 +20,9 @@ interface Screenshot {
     }
 }
 
-const Description = ({ title, content }: { title: string, content: string }) => (
+const Description = ({ title, titleClass, content }: { title: string, titleClass?: string, content: string }) => (
     <div className="ph6 pt2 text-left">
-        <h2>{title}</h2>
+        <h2 className={titleClass}>{title}</h2>
         <p className="mb6">{content}</p>
     </div>
 );
@@ -94,6 +94,7 @@ export default class Popup extends React.Component<AppProps, AppState> {
                 return (<React.Fragment>
                     <Description
                         title="Recording..."
+                        titleClass="red@text"
                         content="Your session is now being recorded. Clicks and websites visited are now tracked until the end of the session."
                     />
                     <Actions>
@@ -120,7 +121,7 @@ export default class Popup extends React.Component<AppProps, AppState> {
                         content="The session has been discarded. Click &amp; website tracked has stopped until a new session has been initiated."
                     />
                     <Actions>
-                        <a className="button green flex-grow" onClick={() => this.setRecordingState(RecordingStatus.started)}>Begin new session</a>
+                        <a className="button black flex-grow" onClick={() => this.setRecordingState(RecordingStatus.stopped)}>Start Over</a>
                     </Actions>
                 </React.Fragment>)
                 break;

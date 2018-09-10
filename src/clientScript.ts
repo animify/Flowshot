@@ -74,6 +74,8 @@ class FlowshotClient {
                     pageY: e.pageY,
                     screenX: e.screenX,
                     screenY: e.screenY,
+                    clientX: e.clientX,
+                    clientY: e.clientY,
                     boundingRect: {
                         x: style.left,
                         y: style.top,

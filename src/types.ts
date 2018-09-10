@@ -20,6 +20,8 @@ export interface SessionData {
         pageY: number;
         screenX: number;
         screenY: number;
+        clientX: number;
+        clientY: number;
         boundingRect: {
             x: number;
             y: number;

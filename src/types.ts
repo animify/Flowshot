@@ -1,5 +1,34 @@
 import EventBus from './EventBus';
 
+export interface Session {
+    date: number;
+    data: SessionData[];
+}
+
+export interface SessionData {
+    date: number;
+    screen: {
+        tab: string;
+        dataURI: string;
+        dimensions: {
+            w: number;
+            h: number;
+        }
+    }
+    click: {
+        pageX: number;
+        pageY: number;
+        screenX: number;
+        screenY: number;
+        boundingRect: {
+            x: number;
+            y: number;
+            h: number;
+            w: number;
+        }
+    }
+}
+
 export interface Recording {
     status: RecordingStatus;
     events: RecordingEvent[];

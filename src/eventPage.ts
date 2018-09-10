@@ -1,36 +1,8 @@
-import { Utils } from "./Utils";
-import { ChromeTabStatus, RecordingStatus } from "./types";
+import { Utils } from './Utils';
+import { ChromeTabStatus, RecordingStatus, Session, SessionData } from './types';
+import FileManager from './FileManager';
 
 console.log = console.log.bind(null, '%c Flowshot Background:', 'font-weight: bold; color: #000');
-
-interface Session {
-    date: number;
-    data: SessionData[];
-}
-
-interface SessionData {
-    date: number;
-    screen: {
-        tab: string;
-        dataURI: string;
-        dimensions: {
-            w: number;
-            h: number;
-        }
-    }
-    click: {
-        pageX: number;
-        pageY: number;
-        screenX: number;
-        screenY: number;
-        boundingRect: {
-            x: number;
-            y: number;
-            h: number;
-            w: number;
-        }
-    }
-}
 
 class FlowshotMain {
     public static currentSession: Session;
@@ -50,6 +22,12 @@ class FlowshotMain {
     private static endSession() {
         console.log('Session ended');
         console.log(FlowshotMain.currentSession);
+        FlowshotMain.saveEvent(null);
+        FlowshotMain.saveSession();
+    }
+
+    private static saveSession() {
+        FileManager.zipFiles(FlowshotMain.currentSession.data);
     }
 
     public static handleSessionChange(state: RecordingStatus) {

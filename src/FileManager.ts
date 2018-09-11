@@ -14,6 +14,7 @@ export default class FileManager {
 
     private static get structure() {
         return {
+            title: `Flowshot-${Date.now()}`,
             date: Date.now(),
             imageDir: 'assets',
             screens: []
@@ -122,7 +123,7 @@ export default class FileManager {
 
         zip.folder(baseSructure.imageDir);
 
-        files.forEach((data: SessionData) => {
+        files.forEach((data: SessionData, i: number) => {
             const newScreenId = Utils.newGUID();
             const imageName = `${newScreenId}.png`;
             zip.file(`${baseSructure.imageDir}/${imageName}`, FileManager.dataURItoBlob(data.screen.dataURI));
@@ -143,11 +144,17 @@ export default class FileManager {
                         y: data.click.boundingRect.y * 2
                     },
                     size: {
-                        height: data.click.boundingRect.h * 2,
-                        width: data.click.boundingRect.w * 2,
+                        h: data.click.boundingRect.h * 2,
+                        w: data.click.boundingRect.w * 2,
                     }
                 }
             });
+        });
+
+        baseSructure.screens.forEach((screen, i) => {
+            if (baseSructure.screens[i + 1]) {
+                screen.area.destination = baseSructure.screens[i + 1].id;
+            }
         });
 
         zip.file('data.json', JSON.stringify(baseSructure));
@@ -156,7 +163,7 @@ export default class FileManager {
             .then((blob) => {
                 const a = document.createElement('a');
                 a.href = window.URL.createObjectURL(blob);
-                a.download = `Flowshot-${Date.now()}.flowshot`;
+                a.download = `${baseSructure.title}.flowshot`;
                 a.style.display = 'none';
                 document.body.appendChild(a);
                 a.click();
